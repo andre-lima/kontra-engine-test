@@ -13,13 +13,15 @@ const paths = {
         js: 'src/scripts/',
         vendors: 'src/scripts/vendors/',
         css: 'src/style/',
-        html: 'src/'
+        html: 'src/',
+        assets: 'src/assets/'
     },
     dest: {
         js: 'dist/',
         vendors: 'dist/',
         css: 'dist/',
-        html: 'dist/'
+        html: 'dist/',
+        assets: 'dist/assets/'
     }
 };
 
@@ -30,7 +32,7 @@ gulp.task('html', function () {
         .pipe(browserSync.stream());
 });
 
-gulp.task('serve', ['clean', 'html', 'js', 'vendors', 'sass'], function() {
+gulp.task('serve', ['html', 'assets', 'js', 'vendors', 'sass'], function() {
 
     browserSync.init({
         server: paths.dest.html
@@ -63,10 +65,16 @@ gulp.task('vendors', () => {
         .pipe(gulp.dest(paths.dest.vendors));
 });
 
+gulp.task('assets', () => {
+    return gulp.src([`${paths.src.assets}**/*.*`])
+        .on('error', notify.onError('Assets error!'))
+        .pipe(gulp.dest(paths.dest.assets));
+});
+
 gulp.task('clean', function() {
     return gulp.src([`${paths.dest.html}*`], { read: false }) // much faster
       .pipe(rimraf());
-   });
+});
 
 gulp.task('default', ['serve']);
 

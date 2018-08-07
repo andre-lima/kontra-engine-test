@@ -1,5 +1,23 @@
 kontra.init();
 
+kontra.assets.imagePath = '/assets/images';
+kontra.assets.audioPath = '/assets/audio';
+kontra.assets.dataPath = '/assets/data';
+
+kontra.assets.load('data.json', ['charge.ogg', 'charge.mp3'], 'mango.gif')
+  .then(function() {
+    console.log('Assets loaded');
+    // console.log(kontra.assets);
+
+    const audio = kontra.assets.audio;
+    const images = kontra.assets.images;
+    const data = kontra.assets.data
+
+    // audio.charge.play();
+    // console.log(data.data);
+  }); 
+
+
 // let sprite = kontra.sprite({
 //     x: 100,        // starting x,y position of the sprite
 //     y: 80,
