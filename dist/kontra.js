@@ -1782,7 +1782,7 @@ this.kontra = {
      * @private
      */
     _drawImg: function drawImage() {
-      this.context.drawImage(this.image, this.x, this.y);
+      this.context.drawImage(this.image, this.x, this.y, this.image.width, this.image.height);
     },
 
     /**
