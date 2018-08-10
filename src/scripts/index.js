@@ -16,6 +16,10 @@ console.log('Assets loaded');
         update: function() {        // update the game state
             sprite1.update();
             sprite2.update();
+
+            kontra.keys.bind(['enter', 'space'], function() {
+                console.log('pew! ');
+              });
         },
         render: function() {        // render the game state
             sprite1.render();
@@ -36,12 +40,23 @@ function createSprites(assets) {
     const sprite1 = kontra.sprite({
         x: 100,        // starting x,y position of the sprite
         y: 80,
-        dx: 2,
-        dy: 1,
+        dx: 0,
+        dy: 0,
         image: assets.images.mango,
         update: function() {
-            this.y += this.dy;
-            this.x += this.dx;
+            if (kontra.keys.pressed('left')) {
+                this.x -= 3;
+            }
+            else if (kontra.keys.pressed('right')) {
+                this.x += 3;
+            }
+            if (kontra.keys.pressed('up')) {
+                this.y -= 3;
+            }
+            else if (kontra.keys.pressed('down')) {
+                this.y += 3;
+            }
+
             // wrap the sprites position when it reaches
             // the edge of the 
             if (this.x > kontra.canvas.width) {
